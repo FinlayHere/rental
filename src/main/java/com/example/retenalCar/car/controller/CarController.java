@@ -20,16 +20,15 @@ import static com.example.retenalCar.infra.ErrorCodeEnum.INVALID_PERIOD;
 public class CarController {
 
     @GetMapping("/available")
-    public List<Car> getAvailableCarsDuring(@RequestParam(name = "startDate", required = true)
+    public List<Car> getAvailableCarsDuring(@RequestParam(name = "startDate")
                                             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
-                                            @RequestParam(name = "endDate", required = true)
+                                            @RequestParam(name = "endDate")
                                             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
 
         RentalPeriod period = RentalPeriod.builder()
                 .startDate(startDate)
                 .endDate(endDate)
                 .build();
-
         if (period.isInvalid()) {
             throw new BizException(INVALID_PERIOD);
         }
