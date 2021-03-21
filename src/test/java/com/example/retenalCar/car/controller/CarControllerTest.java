@@ -17,7 +17,7 @@ public class CarControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    private static final String GET_CAR_URL = "api/v1/rental/available-cars";
+    private static final String GET_CAR_URL = "/api/v1/car/available";
     @Test
     void should_return_cars_when_get_car_given_start_date_and_end_date() throws Exception {
         mockMvc.perform(get(GET_CAR_URL)
