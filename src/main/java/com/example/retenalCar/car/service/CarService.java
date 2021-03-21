@@ -7,7 +7,6 @@ import com.example.retenalCar.order.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -17,10 +16,10 @@ public class CarService {
     private final CarRepository carRepository;
 
     List<Car> findAvailableBy(RentalPeriod period) {
-        List<String> availableCarsId= orderService.findConflictOrderIds(period);
-        if (availableCarsId.isEmpty()){
-            return Collections.emptyList();
+        List<String> conflictOrderIds = orderService.findConflictOrderIds(period);
+        if (conflictOrderIds.isEmpty()) {
+            return carRepository.findAll();
         }
-        return carRepository.findCarsByIdNotIn(availableCarsId);
+        return carRepository.findCarsByIdNotIn(conflictOrderIds);
     }
 }
