@@ -11,9 +11,9 @@ import java.util.List;
 @Repository
 public interface OrderRepository extends JpaRepository<RentalOrder, Long> {
     @Query("SELECT o FROM RentalOrder o " +
-            "WHERE o.endDate <= :endDate " +
-            "AND o.startDate >= :endDate " +
+            "WHERE o.endDate >= :endDate " +
             "AND o.endDate <= :startDate " +
-            "AND o.startDate >=:startDate")
+            "AND o.startDate >= :endDate " +
+            "AND o.startDate <= :startDate")
     List<RentalOrder> findConflictOrderBy(LocalDate startDate, LocalDate endDate);
 }
