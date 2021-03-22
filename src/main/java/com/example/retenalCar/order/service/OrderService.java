@@ -20,7 +20,7 @@ import static com.example.retenalCar.infra.utils.TimeUtils.toLocalDate;
 public class OrderService {
     private final OrderRepository orderRepository;
 
-    public List<String> findConflictOrderIds(RentalPeriod period) {
+    public List<String> findConflictCarIds(RentalPeriod period) {
         List<RentalOrder> conflictOrder =
                 orderRepository.findConflictOrderBy(period.getStartDate(), period.getEndDate());
 
@@ -41,7 +41,7 @@ public class OrderService {
                 .build();
         period.checkValidation();
 
-        if (findConflictOrderIds(period).contains(bookCarCommand.getCarId())) {
+        if (findConflictCarIds(period).contains(bookCarCommand.getCarId())) {
             throw new BizException(CONFLICT_ORDER);
         }
 

@@ -9,7 +9,7 @@ public final class TimeUtils {
 
     }
 
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.BASIC_ISO_DATE;
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     public static LocalDate toLocalDate(String date) {
 

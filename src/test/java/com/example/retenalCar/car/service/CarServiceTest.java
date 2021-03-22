@@ -71,7 +71,7 @@ public class CarServiceTest {
     @Test
     void should_return_list_car_info_when_find_available_given_only_part_of_car_has_conflict_order() {
         when(carRepository.findCarsByIdNotIn(CONFLICT_CAR_IDS)).thenReturn(AVAILABLE_CAR);
-        when(orderService.findConflictOrderIds(PERIOD)).thenReturn(CONFLICT_CAR_IDS);
+        when(orderService.findConflictCarIds(PERIOD)).thenReturn(CONFLICT_CAR_IDS);
         assertThat(carService.findAvailableBy(PERIOD)).isInstanceOf(List.class);
         carService.findAvailableBy(PERIOD).forEach(
                 car -> assertThat(car).isInstanceOf(Car.class)
@@ -80,14 +80,14 @@ public class CarServiceTest {
 
     @Test
     void should_return_empty_list_when_find_available_car_given_all_cars_order_is_conflict() {
-        when(orderService.findConflictOrderIds(PERIOD)).thenReturn(ALL_CAR_IDS);
+        when(orderService.findConflictCarIds(PERIOD)).thenReturn(ALL_CAR_IDS);
         when(carRepository.findCarsByIdNotIn(CONFLICT_CAR_IDS)).thenReturn(emptyList());
         assertThat(carService.findAvailableBy(PERIOD).size()).isEqualTo(ZERO);
     }
 
     @Test
     void should_return_all_car_when_find_available_car_given_there_is_no_conflict_order() {
-        when(orderService.findConflictOrderIds(PERIOD)).thenReturn(emptyList());
+        when(orderService.findConflictCarIds(PERIOD)).thenReturn(emptyList());
         when(carRepository.findAll()).thenReturn(ALL_CARS);
         assertThat(carService.findAvailableBy(PERIOD).size()).isEqualTo(THE_NUMBER_OF_COMPANY_CARS);
     }
