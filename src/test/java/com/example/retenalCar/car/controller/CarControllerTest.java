@@ -1,9 +1,12 @@
 package com.example.retenalCar.car.controller;
 
+import com.example.retenalCar.car.service.CarService;
+import com.example.retenalCar.order.service.OrderService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -16,6 +19,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class CarControllerTest {
     @Autowired
     private MockMvc mockMvc;
+
+    @MockBean
+    private CarService carService;
 
     private static final String GET_CAR_URL = "/api/v1/car/available";
 
