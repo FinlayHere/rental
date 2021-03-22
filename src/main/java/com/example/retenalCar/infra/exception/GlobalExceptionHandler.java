@@ -1,4 +1,4 @@
-package com.example.retenalCar.infra;
+package com.example.retenalCar.infra.exception;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;

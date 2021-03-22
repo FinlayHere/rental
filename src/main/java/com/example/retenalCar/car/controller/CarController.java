@@ -2,7 +2,8 @@ package com.example.retenalCar.car.controller;
 
 import com.example.retenalCar.car.entity.Car;
 import com.example.retenalCar.car.entity.RentalPeriod;
-import com.example.retenalCar.infra.BizException;
+import com.example.retenalCar.car.service.CarService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,14 +11,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
-
-import static com.example.retenalCar.infra.ErrorCodeEnum.INVALID_PERIOD;
 
 @RestController
 @RequestMapping("api/v1/car")
+@RequiredArgsConstructor
 public class CarController {
+    private final CarService carService;
 
     @GetMapping("/available")
     public List<Car> getAvailableCarsDuring(@RequestParam(name = "startDate")
@@ -29,10 +29,8 @@ public class CarController {
                 .startDate(startDate)
                 .endDate(endDate)
                 .build();
-        if (period.isInvalid()) {
-            throw new BizException(INVALID_PERIOD);
-        }
+        period.checkValidation();
 
-        return new ArrayList<>();
+        return carService.findAvailableBy(period);
     }
 }

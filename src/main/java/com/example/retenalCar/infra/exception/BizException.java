@@ -1,4 +1,4 @@
-package com.example.retenalCar.infra;
+package com.example.retenalCar.infra.exception;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

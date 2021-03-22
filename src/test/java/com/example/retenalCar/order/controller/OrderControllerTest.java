@@ -1,6 +1,5 @@
 package com.example.retenalCar.order.controller;
 
-import com.example.retenalCar.car.entity.RentalPeriod;
 import com.example.retenalCar.order.command.BookCarCommand;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -10,8 +9,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-
-import java.time.LocalDate;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -23,12 +20,9 @@ public class OrderControllerTest {
     private MockMvc mockMvc;
 
     private static final String GENERATE_ORDER_CONTROLLER = "/api/v1/order";
+    private static final String USER_ID = "01";
 
-    private static final BookCarCommand ORDER_COMMAND = new BookCarCommand("01",
-            RentalPeriod.builder()
-                    .startDate(LocalDate.of(2021,3,21))
-                    .endDate(LocalDate.of(2021,3,22))
-                    .build());
+    private static final BookCarCommand ORDER_COMMAND = new BookCarCommand();
 
     public static String asJsonString(final Object obj) {
         try {
@@ -41,8 +35,17 @@ public class OrderControllerTest {
     @Test
     void should_return_201_when_book_rental_given_book_successfully() throws Exception {
         mockMvc.perform(post(GENERATE_ORDER_CONTROLLER)
+                .header("userId", USER_ID)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(asJsonString(ORDER_COMMAND)))
                 .andExpect(status().isCreated());
+    }
+
+    @Test
+    void should_return_400_when_book_rental_given_there_is_no_user_id_in_header() throws Exception {
+        mockMvc.perform(post(GENERATE_ORDER_CONTROLLER)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(asJsonString(ORDER_COMMAND)))
+                .andExpect(status().isBadRequest());
     }
 }

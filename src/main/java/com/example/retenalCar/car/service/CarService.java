@@ -15,7 +15,7 @@ public class CarService {
     private final OrderService orderService;
     private final CarRepository carRepository;
 
-    List<Car> findAvailableBy(RentalPeriod period) {
+    public List<Car> findAvailableBy(RentalPeriod period) {
         List<String> conflictOrderIds = orderService.findConflictOrderIds(period);
         if (conflictOrderIds.isEmpty()) {
             return carRepository.findAll();
