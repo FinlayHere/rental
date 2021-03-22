@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Repository
-public interface OrderRepository extends JpaRepository<RentalOrder, String> {
+public interface OrderRepository extends JpaRepository<RentalOrder, Long> {
     @Query("SELECT o FROM RentalOrder o " +
             "WHERE o.endDate <= :endDate " +
             "AND o.startDate >= :endDate " +

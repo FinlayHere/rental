@@ -3,8 +3,8 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/rental?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
-    username: root
-    password: Kfc1122334
+    url: jdbc:mysql://kfc-rental.mysql.database.azure.com:3306/rentalCar?useSSL=true&requireSSL=false
+    username: kfc@kfc-rental
+    password: {password}
   jpa:
     show-sql: true
