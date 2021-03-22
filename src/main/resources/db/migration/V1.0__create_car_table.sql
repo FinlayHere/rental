@@ -8,6 +8,6 @@ CREATE TABLE IF NOT EXISTS `car` (
 INSERT INTO `car`(`id`, `model`, `plate_number`)
 VALUES
 ('01', 'Toyota Camry', '123'),
-('01', 'Toyota Camry', '124'),
-('02', 'BMW 650', '125'),
-('02', 'BMW 650', '126');
+('02', 'Toyota Camry', '124'),
+('03', 'BMW 650', '125'),
+('04', 'BMW 650', '126');
