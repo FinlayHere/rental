@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS `order` (
+CREATE TABLE IF NOT EXISTS `rental_order` (
     `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
     `car_id` VARCHAR(16) NOT NULL,
     `user_id` VARCHAR(16) NOT NULL,
